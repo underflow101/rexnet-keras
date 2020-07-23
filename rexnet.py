@@ -20,10 +20,10 @@ config = CONFIG()
 
 inputs = tf.keras.Input(shape=(224,224,3), name='modelInput')
 
-model = ReXNetV1(inputs=inputs, width_mult=0.5, training=True)
+model = ReXNetV1(width_mult=0.5)
 model.build(input_shape=(None, 224, 224, 3))
 model.summary()
-model.save('./pretrained/rexnet-0.5x.h5')
+model.save_weights('./pretrained/rexnet_0.5x.h5')
 
 print("Saved Model.")
 
@@ -31,5 +31,8 @@ print("Saved Model.")
 
 sgd = SGD(lr=LEARNING_RATE, decay=config.weight_decay, momentum=config.momentum, nesterov=True)
 model.compile(optimizer=sgd, loss='categorical_crossentropy', metrics=['accuracy'])
+print("Done compile")
+
+#model.save('./pretrained')
 
 print("DONE")
